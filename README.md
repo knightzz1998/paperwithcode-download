@@ -1,3 +1,7 @@
+## 项目介绍
+
+:sparkles: 本项目是用于批量下载 PaperWithCode 网站上的文章、代码, 并将相关内容写入到word文档
+
 ## 依赖下载
 
 ```shell
