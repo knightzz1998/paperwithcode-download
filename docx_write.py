@@ -15,7 +15,7 @@ def write_doc(datas, filename):
         pdf_url = data_dict['pdf_url']
         code_url = data_dict['code_url']
         document.add_heading(title, 2)
-        document.add_heading('摘要', 2)
+        document.add_heading('摘要', 3)
         document.add_paragraph(abstract)
         document.add_paragraph(zh_abstract)
         document.add_paragraph("文章主页 : " + paper_url)

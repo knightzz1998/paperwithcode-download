@@ -14,10 +14,10 @@ import json
 from hashlib import md5
 
 
-def translate_word(query):
+def translate_word(query, proxies):
     # Set your own appid/appkey.
-    appid = '20221103001433994x'
-    appkey = '_IJVg0iAfh0PgB9Bu7Mtx'
+    appid = '20221103001433994_'
+    appkey = '_IJVg0iAfh0PgB9Bu7Mt_'
 
     # For list of language codes, please refer to `https://api.fanyi.baidu.com/doc/21`
     from_lang = 'en'
@@ -41,7 +41,7 @@ def translate_word(query):
     payload = {'appid': appid, 'q': query, 'from': from_lang, 'to': to_lang, 'salt': salt, 'sign': sign}
 
     # Send request
-    r = requests.post(url, params=payload, headers=headers)
+    r = requests.post(url, params=payload, headers=headers, proxies=proxies)
     result = r.json()
 
     # Show response
@@ -50,5 +50,9 @@ def translate_word(query):
 
 
 if __name__ == '__main__':
-    result = translate_word("i love you")
+    proxies = {
+        'http': 'http://localhost:4780',
+        'https': 'http://localhost:4780'
+    }
+    result = translate_word("i love you", proxies=proxies)
     print(result)
