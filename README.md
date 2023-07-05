@@ -29,3 +29,10 @@ pip install python-docx
 默认下载到当前 main 文件的路径
 
 需要修改 download_file.py 文件的 BASE_LOCAL 属性
+
+
+### EdgeGPT
+
+建议使用 0.10.16版本 具体原因参考以下 issue
+
+https://github.com/acheong08/EdgeGPT/issues/584
