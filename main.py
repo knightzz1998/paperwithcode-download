@@ -1,8 +1,11 @@
 #! /usr/bin/env python
 # -*-coding:utf-8-*-
+import asyncio
 
 import requests
 from lxml import etree
+
+from newbing_test import init, get_ask
 from translate import translate_word
 from download_file import download
 from docx_write import write_doc
@@ -29,6 +32,9 @@ def get_data(page=1, question="Link Prediction", result=[]):
     links = parse_html.xpath("//div[@class='infinite-container text-center']/div/div/div/div[2]/div/div[1]/h1/a/@href")
     prefix = "https://paperswithcode.com"
 
+    # 初始化 NewBing
+    bot = asyncio.run(init())
+    count = 0
     for title, link in zip(titles, links):
         paper_url = prefix + link
         # print(result[k])
@@ -41,8 +47,15 @@ def get_data(page=1, question="Link Prediction", result=[]):
         # print(pdf_url)
         # print(code_url)
         zh_abstract = translate_word(abstract, proxies)
+        summarize = asyncio.run(get_ask(pdf_url))
+        count += 1
+        if count > 25:
+            asyncio.run(bot.reset())
         # zh_abstract = abstract
-        res = {'title': title, 'abstract': abstract, 'zh_abstract': zh_abstract, 'paper_url': paper_url,
+        res = {'title': title, 'abstract': abstract,
+               'summarize': summarize,
+               'zh_abstract': zh_abstract,
+               'paper_url': paper_url,
                'pdf_url': pdf_url,
                'code_url': code_url}
         # download(k, pdf_url)

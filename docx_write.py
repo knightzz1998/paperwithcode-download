@@ -10,12 +10,15 @@ def write_doc(datas, filename):
     for data_dict in datas:
         title = data_dict['title']
         abstract = data_dict['abstract']
+        summarize = data_dict['summarize']
         zh_abstract = data_dict['zh_abstract']
         paper_url = data_dict['paper_url']
         pdf_url = data_dict['pdf_url']
         code_url = data_dict['code_url']
         document.add_heading(title, 2)
         document.add_heading('摘要', 3)
+        document.add_heading('全文总结', 3)
+        document.add_paragraph(summarize)
         document.add_paragraph(abstract)
         document.add_paragraph(zh_abstract)
         document.add_paragraph("文章主页 : " + paper_url)
